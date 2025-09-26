@@ -21,7 +21,7 @@ const SolvedReveal: React.FC = () => {
         }2.png) center/cover no-repeat`,
         textAlign: "center",
         gap: "10px",
-        paddingTop: "20px",
+        paddingTop: "35px",
       }}
     >
       {" "}

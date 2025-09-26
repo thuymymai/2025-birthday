@@ -46,8 +46,8 @@ const BackgroundMusic: React.FC = () => {
           onClick={startMusic}
           style={{
             position: "fixed",
-            bottom: "20px",
-            right: "20px",
+            bottom: "10px",
+            right: "10px",
             padding: "10px 15px",
             background: "#a4bcd7",
             borderRadius: "8px",

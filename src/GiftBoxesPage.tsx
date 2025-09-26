@@ -131,8 +131,8 @@ const GiftBoxesPage: React.FC = () => {
           onClick={handleReset}
           style={{
             position: "fixed",
-            bottom: "80px",
-            right: "20px",
+            bottom: "65px",
+            right: "10px",
             padding: "10px 15px",
             background: "#dbe4ef",
             borderRadius: "8px",
