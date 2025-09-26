@@ -3,7 +3,6 @@ import MemoryGame from "./MemoryGame";
 import CrosswordHanh from "./SimplePuzzleGame";
 import JigsawPuzzle from "./PuzzleReveal";
 
-// Wrapper that picks game depending on gift id
 const GiftGames: React.FC = () => {
   const { id } = useParams();
 

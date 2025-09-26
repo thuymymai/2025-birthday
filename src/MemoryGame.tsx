@@ -1,5 +1,5 @@
 import confetti from "canvas-confetti";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { markGiftAsOpened } from "./utils";
 import Modal from "./Modal";
@@ -13,7 +13,7 @@ const images = [
   "/5.jpeg",
   "/6.jpeg",
 ];
-// Duplicate to make pairs
+
 const createDeck = (images: string[]) =>
   [...images, ...images].sort(() => Math.random() - 0.5);
 
@@ -23,7 +23,6 @@ const MemoryGame: React.FC = () => {
   const [cards] = useState(() => createDeck(images));
   const [flipped, setFlipped] = useState<number[]>([]);
   const [matched, setMatched] = useState<number[]>([]);
-  const [showModal, setShowModal] = useState(false);
 
   const handleClick = (index: number) => {
     if (
@@ -43,18 +42,13 @@ const MemoryGame: React.FC = () => {
         setFlipped([]);
         if (matched.length + 2 === cards.length) {
           confetti({ particleCount: 200, spread: 70 });
-          markGiftAsOpened(1); // 🎁 mark Gift 1 solved
+          markGiftAsOpened(1);
         }
       } else {
         setTimeout(() => setFlipped([]), 800);
       }
     }
   };
-  useEffect(() => {
-    if (matched.length === cards.length) {
-      setShowModal(true);
-    }
-  }, [matched, cards]);
 
   return (
     <div
@@ -74,7 +68,7 @@ const MemoryGame: React.FC = () => {
         style={{
           fontFamily: "'Dancing Script', cursive",
           fontSize: "30px",
-          color: "#4A76A8", // 🎨 matches your gift box color
+          color: "#4A76A8",
           textShadow: "1px 1px 3px rgba(0,0,0,0.3)",
         }}
       >
@@ -93,7 +87,7 @@ const MemoryGame: React.FC = () => {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(3, 90px)", // 4 per row
+          gridTemplateColumns: "repeat(3, 90px)",
           gap: "8px",
           justifyContent: "center",
         }}
@@ -127,7 +121,7 @@ const MemoryGame: React.FC = () => {
           </div>
         ))}
       </div>
-      <Modal show={showModal} onClose={() => setShowModal(false)}>
+      <Modal show={matched.length === cards.length}>
         <div>
           <span
             style={{

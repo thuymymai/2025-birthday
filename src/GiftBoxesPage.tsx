@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CustomButton from "./Button";
 
 const GiftBoxesPage: React.FC = () => {
   const navigate = useNavigate();
@@ -27,7 +26,6 @@ const GiftBoxesPage: React.FC = () => {
     localStorage.removeItem("openedGifts");
   };
 
-  // Check if all gifts are opened
   const allReceived = [1, 2, 3].every((id) => opened[id]);
 
   return (
@@ -44,7 +42,6 @@ const GiftBoxesPage: React.FC = () => {
         overflow: "hidden",
       }}
     >
-      {/* Title */}
       <div
         style={{
           marginBottom: "20px",
@@ -68,7 +65,6 @@ const GiftBoxesPage: React.FC = () => {
         Open your gift from top to bottom**
       </span>
 
-      {/* Gift boxes */}
       <div
         style={{
           display: "flex",
@@ -100,31 +96,30 @@ const GiftBoxesPage: React.FC = () => {
               }}
             />
 
-            {/* Banner overlay if solved */}
             {opened[id] && (
               <div
                 style={{
+                  fontFamily: "'Dancing Script', cursive",
                   position: "absolute",
                   top: "50%",
                   left: "50%",
                   transform: "translate(-50%, -50%) rotate(-10deg)",
-                  backgroundColor: "rgba(74, 118, 168, 0.9)",
+                  backgroundColor: "rgba(105, 146, 193, 0.9)",
                   color: "white",
                   padding: "6px 12px",
                   borderRadius: "6px",
                   fontWeight: "bold",
-                  fontSize: "18px",
+                  fontSize: "20px",
                   boxShadow: "0 2px 6px rgba(0,0,0,0.4)",
                 }}
               >
-                Received
+                Yours
               </div>
             )}
           </div>
         ))}
       </div>
 
-      {/* Reset button only if all gifts received */}
       {allReceived && (
         <button
           onClick={handleReset}

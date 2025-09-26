@@ -1,4 +1,3 @@
-// ---- Landing Page with Video ----
 import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -12,9 +11,9 @@ const Home: React.FC = () => {
     const handleEnd = () => {
       playCount++;
       if (playCount < 2) {
-        videoRef.current?.play(); // replay once
+        videoRef.current?.play();
       } else {
-        navigate("/gifts"); // go to gifts after 2nd play
+        navigate("/gifts");
       }
     };
 
@@ -41,7 +40,7 @@ const Home: React.FC = () => {
     >
       <video
         ref={videoRef}
-        src="/video.mp4" // place file inside /public
+        src="/video.mp4"
         style={{
           width: "100%",
           height: "100%",
@@ -53,7 +52,6 @@ const Home: React.FC = () => {
         autoPlay
         muted
         playsInline
-        // iOS legacy support:
         preload="auto"
         webkit-playsinline="true"
         x-webkit-airplay="allow"

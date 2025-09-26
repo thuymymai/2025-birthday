@@ -106,7 +106,7 @@ const CrosswordHanh: React.FC = () => {
 
     if (allCorrect && !showModal) {
       confetti({ particleCount: 200, spread: 70 });
-      markGiftAsOpened(2); // 🎁 mark Gift 2 solved
+      markGiftAsOpened(2);
       setShowModal(true);
     }
   }, [grid, showModal]);
@@ -227,9 +227,7 @@ const CrosswordHanh: React.FC = () => {
           ))}
         </ol>
       </div>
-
-      {/* Completed message in modal */}
-      <Modal show={showModal} onClose={() => setShowModal(false)}>
+      <Modal show={showModal}>
         <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
           <span style={{ fontSize: "18px", color: "#4A76A8" }}>
             Secret column: HANH 🎉

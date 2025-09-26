@@ -26,8 +26,8 @@ const GiftReceivedPage: React.FC = () => {
         style={{
           fontFamily: "'Dancing Script', cursive",
           fontSize: "30px",
-          color: "#4A76A8", // 🎨 matches your gift box color
-          textShadow: "1px 1px 3px rgba(0,0,0,0.3)", // subtle shadow for readability
+          color: "#4A76A8",
+          textShadow: "1px 1px 3px rgba(0,0,0,0.3)", 
         }}
       >
         Happy Birthday #{giftId}

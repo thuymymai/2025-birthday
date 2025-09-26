@@ -2,11 +2,10 @@ import React from "react";
 
 type ModalProps = {
   show: boolean;
-  onClose: () => void;
   children: React.ReactNode;
 };
 
-const Modal: React.FC<ModalProps> = ({ show, onClose, children }) => {
+const Modal: React.FC<ModalProps> = ({ show, children }) => {
   if (!show) return null;
 
   return (
@@ -32,24 +31,10 @@ const Modal: React.FC<ModalProps> = ({ show, onClose, children }) => {
           padding: "20px",
           maxWidth: "90%",
           textAlign: "center",
-          boxShadow: "0 8px 20px rgba(0,0,0,0.25)", // ✅ shadow
+          boxShadow: "0 8px 20px rgba(0,0,0,0.25)",
           position: "relative",
         }}
       >
-        <button
-          onClick={onClose}
-          style={{
-            backgroundColor: "white",
-            color: "white",
-            border: "none",
-            borderRadius: "6px",
-            cursor: "pointer",
-            alignSelf: "flex-end",
-            justifySelf: "flex-end",
-          }}
-        >
-          ✖️
-        </button>
         {children}
       </div>
     </div>

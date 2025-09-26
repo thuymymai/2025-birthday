@@ -12,7 +12,7 @@ const GiftVideo: React.FC = () => {
       if (video.requestFullscreen) {
         video.requestFullscreen();
       } else if ((video as any).webkitEnterFullscreen) {
-        (video as any).webkitEnterFullscreen(); // Safari iOS
+        (video as any).webkitEnterFullscreen();
       }
       video.play();
     }
@@ -31,7 +31,6 @@ const GiftVideo: React.FC = () => {
       onPlay={handlePlay}
       onEnded={handleEnded}
       preload="auto"
-      poster="/gift-thumbnail.jpg" // static preview image
     >
       <source src="/gift.MOV" type="video/mp4" />
     </video>

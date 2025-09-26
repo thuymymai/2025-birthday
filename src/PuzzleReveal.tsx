@@ -1,4 +1,3 @@
-// src/pages/JigsawPuzzle.tsx
 import confetti from "canvas-confetti";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -17,16 +16,14 @@ const JigsawPuzzle: React.FC = () => {
     height: number;
   } | null>(null);
 
-  // Load natural image size so we can keep ratio
   useEffect(() => {
     const img = new Image();
-    img.src = "/puzzle.jpeg"; // 🔄 your image
+    img.src = "/puzzle.jpeg";
     img.onload = () => {
       setImageSize({ width: img.width, height: img.height });
     };
   }, []);
 
-  // Shuffle on load
   useEffect(() => {
     const shuffled = Array.from({ length: totalPieces }, (_, i) => i).sort(
       () => Math.random() - 0.5
@@ -79,7 +76,7 @@ const JigsawPuzzle: React.FC = () => {
         style={{
           fontFamily: "'Dancing Script', cursive",
           fontSize: "30px",
-          color: "#4A76A8", // 🎨 matches your gift box color
+          color: "#4A76A8",
           textShadow: "1px 1px 3px rgba(0,0,0,0.3)",
         }}
       >
@@ -106,7 +103,7 @@ const JigsawPuzzle: React.FC = () => {
           gap: "2px",
           width: "80%",
           margin: "0 auto",
-          aspectRatio: `${aspectRatio}`, // ✅ keeps correct ratio
+          aspectRatio: `${aspectRatio}`,
         }}
       >
         {pieces.map((piece, index) => {

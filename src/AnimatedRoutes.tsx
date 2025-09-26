@@ -1,7 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import BackgroundLayout from "./BackgroundLayout";
 import GiftBoxesPage from "./GiftBoxesPage";
 import GiftGames from "./GiftGames";
 import GiftReceivedPage from "./GiftReceivePage";
@@ -17,7 +16,7 @@ const PageWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       style={{
         width: "100vw",
         height: "100%",
-        position: "absolute", // take full viewport
+        position: "absolute", 
         top: 0,
         left: 0,
         overflowX: "hidden",

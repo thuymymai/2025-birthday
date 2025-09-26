@@ -1,4 +1,3 @@
-// BackgroundLayout.tsx
 import React from "react";
 
 type Props = {
@@ -14,7 +13,7 @@ const BackgroundLayout: React.FC<Props> = ({ children }) => {
         left: 0,
         width: "100vw",
         height: "100vh",
-        backgroundImage: "url('/2.png')", // must be in public/ folder
+        backgroundImage: "url('/2.png')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",

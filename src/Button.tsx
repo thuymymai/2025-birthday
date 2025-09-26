@@ -23,18 +23,6 @@ const CustomButton: React.FC<ButtonProps> = ({ children, onClick, style }) => {
         transition: "all 0.2s ease-in-out",
         ...style,
       }}
-      onMouseEnter={(e) =>
-        ((e.target as HTMLButtonElement).style.backgroundColor = "#93AAC5")
-      }
-      onMouseLeave={(e) =>
-        ((e.target as HTMLButtonElement).style.backgroundColor = "#A4BCD7")
-      }
-      onMouseDown={(e) =>
-        ((e.target as HTMLButtonElement).style.transform = "scale(0.97)")
-      }
-      onMouseUp={(e) =>
-        ((e.target as HTMLButtonElement).style.transform = "scale(1)")
-      }
     >
       {children}
     </button>

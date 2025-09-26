@@ -7,7 +7,7 @@ const BackgroundMusic: React.FC = () => {
   useEffect(() => {
     const audio = audioRef.current;
     if (audio) {
-      audio.loop = true; // 🔁 keep looping forever
+      audio.loop = true;
     }
   }, []);
 
@@ -40,10 +40,7 @@ const BackgroundMusic: React.FC = () => {
 
   return (
     <div>
-      {/* Hidden audio element */}
       <audio ref={audioRef} src="/music.mp3" />
-
-      {/* First start button (iOS requires user interaction) */}
       {!isPlaying && (
         <button
           onClick={startMusic}
@@ -63,7 +60,6 @@ const BackgroundMusic: React.FC = () => {
         </button>
       )}
 
-      {/* Music toggle button (shows only after music has started once) */}
       {isPlaying && (
         <button
           onClick={toggleMusic}
