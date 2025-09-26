@@ -32,7 +32,7 @@ const GiftVideo: React.FC = () => {
       onEnded={handleEnded}
       preload="auto"
     >
-      <source src="/gift.MOV" type="video/mp4" />
+      <source src="/gift.mp4" type="video/mp4" />
     </video>
   );
 };
