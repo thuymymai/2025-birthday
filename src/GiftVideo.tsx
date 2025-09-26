@@ -1,39 +1,45 @@
-import React, { useRef } from "react";
+import React, { useEffect } from "react";
 
 const GiftVideo: React.FC = () => {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const srcUrl = `https://drive.google.com/file/d/${fileId}/preview`;
 
-  const handlePlay = () => {
-    const video = videoRef.current;
-    if (video) {
-      const bgAudio = document.querySelector("audio");
-      if (bgAudio) bgAudio.pause();
-
-      if (video.requestFullscreen) {
-        video.requestFullscreen();
-      } else if ((video as any).webkitEnterFullscreen) {
-        (video as any).webkitEnterFullscreen();
-      }
-      video.play();
-    }
-  };
-
-  const handleEnded = () => {
+  useEffect(() => {
     const bgAudio = document.querySelector("audio");
-    if (bgAudio) bgAudio.play();
-  };
+
+    if (bgAudio) {
+      bgAudio.pause();
+    }
+
+    return () => {
+      if (bgAudio) {
+        bgAudio.play();
+      }
+    };
+  }, []);
 
   return (
-    <video
-      ref={videoRef}
-      controls
-      style={{ width: "50%", cursor: "pointer" }}
-      onPlay={handlePlay}
-      onEnded={handleEnded}
-      preload="auto"
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+        height: "100%",
+      }}
     >
-      <source src="/gift.mp4" type="video/mp4" />
-    </video>
+      <iframe
+        src={srcUrl}
+        width="90%"
+        height="480"
+        allow="autoplay"
+        style={{
+          border: "none",
+          borderRadius: "12px",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+        }}
+        allowFullScreen
+      ></iframe>
+    </div>
   );
 };
 
