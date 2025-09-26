@@ -44,12 +44,11 @@ const GiftBoxesPage: React.FC = () => {
     >
       <div
         style={{
-          marginBottom: "20px",
           fontFamily: "'Dancing Script', cursive",
           fontSize: "30px",
           color: "#4A76A8",
           textShadow: "1px 1px 3px rgba(0,0,0,0.3)",
-          userSelect: "none",
+          marginBottom: "20px",
         }}
       >
         Choose a gift
@@ -103,14 +102,19 @@ const GiftBoxesPage: React.FC = () => {
                   position: "absolute",
                   top: "50%",
                   left: "50%",
-                  transform: "translate(-50%, -50%) rotate(-10deg)",
-                  backgroundColor: "rgba(105, 146, 193, 0.9)",
+                  transform: "translate(-50%, -50%) rotate(-5deg)",
+                  background:
+                    "repeating-linear-gradient(45deg, #a4bcd7, #a4bcd7 12px, #94aac7 12px, #94aac7 24px)",
                   color: "white",
-                  padding: "6px 12px",
-                  borderRadius: "6px",
+                  padding: "5px 30px",
                   fontWeight: "bold",
-                  fontSize: "20px",
-                  boxShadow: "0 2px 6px rgba(0,0,0,0.4)",
+                  fontSize: "22px",
+                  textAlign: "center",
+                  textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
+                  boxShadow: "4px 4px 12px rgba(0,0,0,0.3)",
+                  border: "2px dashed rgba(255,255,255,0.6)",
+                  clipPath:
+                    "polygon(5% 0%, 95% 0%, 100% 20%, 95% 40%, 100% 60%, 95% 80%, 100% 100%, 5% 100%, 0% 80%, 5% 60%, 0% 40%, 5% 20%)",
                 }}
               >
                 Yours
