@@ -6,7 +6,9 @@ import GiftGames from "./GiftGames";
 import GiftReceivedPage from "./GiftReceivePage";
 import Home from "./Home";
 
-const PageWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const PageWrapper: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -16,7 +18,7 @@ const PageWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       style={{
         width: "100vw",
         height: "100%",
-        position: "absolute", 
+        position: "absolute",
         top: 0,
         left: 0,
         overflowX: "hidden",

@@ -20,8 +20,13 @@ const GiftVideo: React.FC = () => {
   };
 
   const handleEnded = () => {
-    const bgAudio = document.querySelector("audio");
-    if (bgAudio) bgAudio.play();
+    const video = videoRef.current;
+
+    if (document.fullscreenElement) {
+      document.exitFullscreen?.();
+    } else if ((video as any).webkitExitFullscreen) {
+      (video as any).webkitExitFullscreen();
+    }
   };
 
   return (

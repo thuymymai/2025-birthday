@@ -146,7 +146,7 @@ const CrosswordHanh: React.FC = () => {
           textAlign: "center",
         }}
       >
-        Find the secret word (column) by completing the each row 🔍
+        Find the secret word (column) by completing each row 🔍
       </span>
 
       {/* Crossword grid */}
@@ -161,7 +161,6 @@ const CrosswordHanh: React.FC = () => {
       >
         {Array.from({ length: GRID_ROWS }).map((_, row) =>
           Array.from({ length: GRID_COLS }).map((_, col) => {
-            // check if cell belongs to a horizontal word
             const wordHere = words.find(
               (w) =>
                 w.row === row && col >= w.col && col < w.col + w.word.length
@@ -176,13 +175,17 @@ const CrosswordHanh: React.FC = () => {
               );
             }
 
+            const letterIndex = col - wordHere.col;
+            const correctLetter = wordHere.word[letterIndex];
+            const enteredLetter = grid[row][col];
+
             return (
               <input
                 key={`${row}-${col}`}
                 ref={(el) => {
                   inputRefs.current[row][col] = el;
                 }}
-                value={grid[row][col]}
+                value={enteredLetter}
                 maxLength={1}
                 onChange={(e) => handleChange(row, col, e.target.value)}
                 onKeyDown={(e) => handleKeyDown(e, row, col)}
@@ -193,8 +196,13 @@ const CrosswordHanh: React.FC = () => {
                   fontWeight: "bold",
                   fontSize: "18px",
                   border: "1px solid #4A76A8",
-                  backgroundColor: "#4A76A8", // gift box blue
-                  color: "white", // white text
+                  backgroundColor: "#4A76A8",
+                  color:
+                    enteredLetter === ""
+                      ? "white"
+                      : enteredLetter === correctLetter
+                      ? "white"
+                      : "red",
                   borderRadius: "6px",
                 }}
               />

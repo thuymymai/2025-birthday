@@ -32,3 +32,13 @@
     animation: logo-spin infinite 20s linear;
   }
 }
+
+@keyframes fadeInImage {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
