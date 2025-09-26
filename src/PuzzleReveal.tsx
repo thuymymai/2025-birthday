@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import CustomButton from "./Button";
 import { markGiftAsOpened } from "./utils";
 
-const size = 4; // ⬅️ Change to 5 for 25 pieces
+const size = 4; // ⬅️
 const totalPieces = size * size;
 
 const JigsawPuzzle: React.FC = () => {
@@ -18,7 +18,7 @@ const JigsawPuzzle: React.FC = () => {
 
   useEffect(() => {
     const img = new Image();
-    img.src = "/puzzle.jpeg";
+    img.src = `${import.meta.env.BASE_URL}puzzle.jpeg`;
     img.onload = () => {
       setImageSize({ width: img.width, height: img.height });
     };
@@ -66,7 +66,9 @@ const JigsawPuzzle: React.FC = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        background: "url('/2.png') center/cover no-repeat",
+        background: `url(${
+          import.meta.env.BASE_URL
+        }2.png) center/cover no-repeat`,
         textAlign: "center",
         gap: "10px",
         paddingTop: "20px",
@@ -94,6 +96,7 @@ const JigsawPuzzle: React.FC = () => {
         Tap a piece, then tap another spot to swap them. If the piece is not
         blurred, it’s in the right spot 🧩
       </span>
+
       {/* Puzzle grid */}
       <div
         style={{
@@ -117,7 +120,7 @@ const JigsawPuzzle: React.FC = () => {
               style={{
                 width: "100%",
                 height: "100%",
-                backgroundImage: "url('/puzzle.jpeg')",
+                backgroundImage: `url(${import.meta.env.BASE_URL}puzzle.jpeg)`,
                 backgroundSize: `${size * 100}% ${size * 100}%`,
                 backgroundPosition: `${(col / (size - 1)) * 100}% ${
                   (row / (size - 1)) * 100

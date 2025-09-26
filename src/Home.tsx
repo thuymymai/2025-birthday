@@ -40,7 +40,7 @@ const Home: React.FC = () => {
     >
       <video
         ref={videoRef}
-        src="/video.mp4"
+        src={`${import.meta.env.BASE_URL}video.mp4`}
         style={{
           width: "100%",
           height: "100%",

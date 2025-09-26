@@ -17,7 +17,9 @@ const GiftReceivedPage: React.FC = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        background: "url('/2.png') center/cover no-repeat",
+        background: `url(${
+          import.meta.env.BASE_URL
+        }2.png) center/cover no-repeat`,
         textAlign: "center",
         gap: "20px",
       }}
@@ -27,7 +29,7 @@ const GiftReceivedPage: React.FC = () => {
           fontFamily: "'Dancing Script', cursive",
           fontSize: "30px",
           color: "#4A76A8",
-          textShadow: "1px 1px 3px rgba(0,0,0,0.3)", 
+          textShadow: "1px 1px 3px rgba(0,0,0,0.3)",
         }}
       >
         Happy Birthday #{giftId}
@@ -45,13 +47,13 @@ const GiftReceivedPage: React.FC = () => {
             Treat yourself with some new skincare ✨
           </span>
           <a
-            href="/giftcard.jpg"
-            download="giftcard.jpg"
+            href={`url(${import.meta.env.BASE_URL}giftcard.jpg`}
+            download={`url(${import.meta.env.BASE_URL}giftcard.jpg`}
             target="_blank"
             rel="noopener noreferrer"
           >
             <img
-              src="/giftcard.jpg"
+              src={`${import.meta.env.BASE_URL}giftcard.jpg`}
               alt="Gift card"
               style={{
                 width: "90%",
@@ -81,13 +83,13 @@ const GiftReceivedPage: React.FC = () => {
             </strong>
           </span>
           <a
-            href="/concertTickets.jpg"
-            download="concertTickets.jpg"
+            href={`url(${import.meta.env.BASE_URL}concertTickets.jpg`}
+            download={`url(${import.meta.env.BASE_URL}concertTickets.jpg`}
             target="_blank"
             rel="noopener noreferrer"
           >
             <img
-              src="/concertTickets.jpg"
+              src={`${import.meta.env.BASE_URL}concertTickets.jpg`}
               alt="Concert Ticket"
               style={{
                 width: "50%",
@@ -101,7 +103,10 @@ const GiftReceivedPage: React.FC = () => {
       )}
       {giftId === 3 && <GiftVideo />}
       <br />
-      <CustomButton onClick={() => navigate("/gifts")} style={{ marginTop: "20px" }}>
+      <CustomButton
+        onClick={() => navigate("/gifts")}
+        style={{ marginTop: "20px" }}
+      >
         See other gifts
       </CustomButton>
     </div>

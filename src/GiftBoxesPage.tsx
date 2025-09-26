@@ -37,7 +37,9 @@ const GiftBoxesPage: React.FC = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        background: "url('/2.png') center/cover no-repeat",
+        background: `url(${
+          import.meta.env.BASE_URL
+        }2.png) center/cover no-repeat`,
         textAlign: "center",
         overflow: "hidden",
       }}
@@ -84,7 +86,7 @@ const GiftBoxesPage: React.FC = () => {
             onClick={() => handleClick(id)}
           >
             <img
-              src={`/gift_closed.webp`}
+              src={`${import.meta.env.BASE_URL}gift_closed.webp`}
               alt={`Gift ${id}`}
               style={{
                 width: "100%",

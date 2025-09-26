@@ -40,7 +40,7 @@ const BackgroundMusic: React.FC = () => {
 
   return (
     <div>
-      <audio ref={audioRef} src="/music.mp3" />
+      <audio ref={audioRef} src={`${import.meta.env.BASE_URL}music.mp3`} />
       {!isPlaying && (
         <button
           onClick={startMusic}

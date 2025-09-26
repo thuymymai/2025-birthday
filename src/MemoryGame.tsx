@@ -6,12 +6,12 @@ import Modal from "./Modal";
 import CustomButton from "./Button";
 
 const images = [
-  "/1.jpeg",
-  "/2.jpeg",
-  "/3.jpeg",
-  "/4.jpeg",
-  "/5.jpeg",
-  "/6.jpeg",
+  `${import.meta.env.BASE_URL}1.jpeg`,
+  `${import.meta.env.BASE_URL}2.jpeg`,
+  `${import.meta.env.BASE_URL}3.jpeg`,
+  `${import.meta.env.BASE_URL}4.jpeg`,
+  `${import.meta.env.BASE_URL}5.jpeg`,
+  `${import.meta.env.BASE_URL}6.jpeg`,
 ];
 
 const createDeck = (images: string[]) =>
@@ -58,7 +58,9 @@ const MemoryGame: React.FC = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        background: "url('/2.png') center/cover no-repeat",
+        background: `url(${
+          import.meta.env.BASE_URL
+        }2.png) center/cover no-repeat`,
         textAlign: "center",
         gap: "20px",
         paddingTop: "20px",

@@ -119,7 +119,9 @@ const CrosswordHanh: React.FC = () => {
         display: "flex",
         flexDirection: "column",
         paddingTop: "30px",
-        background: "url('/2.png') center/cover no-repeat",
+        background: `url(${
+          import.meta.env.BASE_URL
+        }2.png) center/cover no-repeat`,
       }}
     >
       <span
