@@ -7,9 +7,15 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    let playCount = 0;
+
     const handleEnd = () => {
-      // Redirect to first clue automatically
-      navigate("/gifts");
+      playCount++;
+      if (playCount < 2) {
+        videoRef.current?.play(); // replay once
+      } else {
+        navigate("/gifts"); // go to gifts after 2nd play
+      }
     };
 
     const video = videoRef.current;

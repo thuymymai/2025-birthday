@@ -1,5 +1,7 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import GiftVideo from "./GiftVideo";
+import CustomButton from "./Button";
 
 const GiftReceivedPage: React.FC = () => {
   const { id } = useParams();
@@ -88,7 +90,7 @@ const GiftReceivedPage: React.FC = () => {
               src="/concertTickets.jpg"
               alt="Concert Ticket"
               style={{
-                width: "90%",
+                width: "50%",
                 cursor: "pointer",
                 borderRadius: "8px",
                 boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
@@ -97,15 +99,11 @@ const GiftReceivedPage: React.FC = () => {
           </a>
         </>
       )}
-      {giftId === 3 && (
-        <video controls style={{ width: "250px" }}>
-          <source src="/birthday_video.mp4" type="video/mp4" />
-        </video>
-      )}
+      {giftId === 3 && <GiftVideo />}
       <br />
-      <button onClick={() => navigate("/gifts")} style={{ marginTop: "20px" }}>
+      <CustomButton onClick={() => navigate("/gifts")} style={{ marginTop: "20px" }}>
         See other gifts
-      </button>
+      </CustomButton>
     </div>
   );
 };

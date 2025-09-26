@@ -1,8 +1,9 @@
-// src/pages/MemoryGame.tsx
 import confetti from "canvas-confetti";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { markGiftAsOpened } from "./utils";
+import Modal from "./Modal";
+import CustomButton from "./Button";
 
 const images = [
   "/1.jpeg",
@@ -10,7 +11,7 @@ const images = [
   "/3.jpeg",
   "/4.jpeg",
   "/5.jpeg",
-  "/puzzle.jpeg",
+  "/6.jpeg",
 ];
 // Duplicate to make pairs
 const createDeck = (images: string[]) =>
@@ -19,9 +20,10 @@ const createDeck = (images: string[]) =>
 const MemoryGame: React.FC = () => {
   const navigate = useNavigate();
 
-  const cards = createDeck(images);
+  const [cards] = useState(() => createDeck(images));
   const [flipped, setFlipped] = useState<number[]>([]);
   const [matched, setMatched] = useState<number[]>([]);
+  const [showModal, setShowModal] = useState(false);
 
   const handleClick = (index: number) => {
     if (
@@ -48,6 +50,11 @@ const MemoryGame: React.FC = () => {
       }
     }
   };
+  useEffect(() => {
+    if (matched.length === cards.length) {
+      setShowModal(true);
+    }
+  }, [matched, cards]);
 
   return (
     <div
@@ -56,11 +63,11 @@ const MemoryGame: React.FC = () => {
         height: "100%",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
         alignItems: "center",
         background: "url('/2.png') center/cover no-repeat",
         textAlign: "center",
         gap: "20px",
+        paddingTop: "20px",
       }}
     >
       <span
@@ -120,21 +127,28 @@ const MemoryGame: React.FC = () => {
           </div>
         ))}
       </div>
-      {matched.length === cards.length && (
+      <Modal show={showModal} onClose={() => setShowModal(false)}>
         <div>
-          <h3 style={{ marginTop: "20px" }}>
-            Congratulations passing the first game! Did you look at your
-            childhood self and know that she is truly proud of who you are right
-            now!
-          </h3>
-          <button
+          <span
+            style={{
+              fontFamily: "'Roboto Mono', monospace",
+              color: "#94A3B8",
+              width: "90%",
+              fontSize: "16px",
+            }}
+          >
+            Congratulations on passing the first game! When you look at your
+            childhood self, know that she would be so proud of the person you’ve
+            become today.
+          </span>
+          <CustomButton
             onClick={() => navigate("/gift/1/received")}
             style={{ marginTop: "20px" }}
           >
-            Reveal the Gift
-          </button>
+            Open gift
+          </CustomButton>
         </div>
-      )}
+      </Modal>
     </div>
   );
 };

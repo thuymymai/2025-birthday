@@ -66,28 +66,9 @@ const AnimatedRoutes: React.FC = () => {
             </PageWrapper>
           }
         />
-
-        <Route
-          path="/finish"
-          element={
-            <PageWrapper>
-              <Finish />
-            </PageWrapper>
-          }
-        />
       </Routes>
     </AnimatePresence>
   );
 };
 
 export default AnimatedRoutes;
-
-// ---- Final Page ----
-const Finish: React.FC = () => (
-  <BackgroundLayout>
-    <div className="p-6 text-center">
-      <h1 className="text-3xl font-bold mb-4">🎁 You found your gift! 🎁</h1>
-      <p className="mb-4">Congratulations on finishing the treasure hunt!</p>
-    </div>
-  </BackgroundLayout>
-);

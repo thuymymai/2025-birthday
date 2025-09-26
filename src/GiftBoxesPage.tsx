@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import CustomButton from "./Button";
 
 const GiftBoxesPage: React.FC = () => {
   const navigate = useNavigate();
@@ -64,7 +65,7 @@ const GiftBoxesPage: React.FC = () => {
           fontSize: "14px",
         }}
       >
-        Recommendation*: Open your gift from top to bottom
+        Open your gift from top to bottom**
       </span>
 
       {/* Gift boxes */}
@@ -128,17 +129,18 @@ const GiftBoxesPage: React.FC = () => {
         <button
           onClick={handleReset}
           style={{
-            marginTop: "30px",
-            padding: "10px 20px",
-            backgroundColor: "#4A76A8",
-            color: "white",
+            position: "fixed",
+            bottom: "80px",
+            right: "20px",
+            padding: "10px 15px",
+            background: "#dbe4ef",
+            borderRadius: "8px",
             border: "none",
-            borderRadius: "6px",
-            fontWeight: "bold",
             cursor: "pointer",
+            zIndex: 9999,
           }}
         >
-          🔄 Reset Games
+          🔄
         </button>
       )}
     </div>

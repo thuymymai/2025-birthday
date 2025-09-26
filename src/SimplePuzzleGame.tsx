@@ -1,14 +1,13 @@
-// src/pages/CrosswordHanh.tsx
 import React, { useState, useEffect, useRef } from "react";
 import confetti from "canvas-confetti";
 import { useNavigate } from "react-router-dom";
 import { markGiftAsOpened } from "./utils";
 import Modal from "./Modal";
+import CustomButton from "./Button";
 
 const GRID_ROWS = 4;
 const GRID_COLS = 13;
 
-// HANH as vertical column
 const words = [
   {
     word: "HAPPY",
@@ -17,31 +16,31 @@ const words = [
     direction: "across",
     crossAt: 0,
     clue: "I wish you a ____ birthday today!",
-  }, // crosses H
+  },
   {
     word: "GRATEFUL",
     row: 1,
     col: 1,
     direction: "across",
     crossAt: 1,
-    clue: "I'm _____ to have you in my life",
-  }, // crosses A
+    clue: "I'm ____ to have you in my life",
+  },
   {
     word: "KIND",
     row: 2,
     col: 1,
     direction: "across",
     crossAt: 2,
-    clue: "The trait of you I love the most: you care deeply and make others feel safe",
-  }, // crosses N
+    clue: "The trait of you I love the most: you care deeply and make others feel safe.",
+  },
   {
     word: "HEARTFELT",
     row: 3,
     col: 3,
     direction: "across",
     crossAt: 0,
-    clue: "I love that we always have 💕_____ conversations with each other, it deeply heals me as a child and I love to spend time with you",
-  }, // crosses H
+    clue: "I love that we always have ____ conversations with each other, it deeply heals me and I love to spend time with you.",
+  },
 ];
 
 const CrosswordHanh: React.FC = () => {
@@ -67,7 +66,6 @@ const CrosswordHanh: React.FC = () => {
     );
     setGrid(newGrid);
 
-    // Auto move right in the same word
     const word = words.find(
       (w) => w.row === row && col >= w.col && col < w.col + w.word.length
     );
@@ -86,7 +84,6 @@ const CrosswordHanh: React.FC = () => {
     col: number
   ) => {
     if (e.key === "Backspace" && !grid[row][col]) {
-      // if current box is empty, move focus back
       let prevCol = col - 1;
       if (prevCol >= 0) {
         inputRefs.current[row][prevCol]?.focus();
@@ -98,7 +95,6 @@ const CrosswordHanh: React.FC = () => {
     }
   };
 
-  // Check correctness
   useEffect(() => {
     const allCorrect = words.every(({ word, row, col }) =>
       word.split("").every((letter, i) => {
@@ -122,6 +118,7 @@ const CrosswordHanh: React.FC = () => {
         height: "100vh",
         display: "flex",
         flexDirection: "column",
+        paddingTop: "30px",
         background: "url('/2.png') center/cover no-repeat",
       }}
     >
@@ -129,25 +126,25 @@ const CrosswordHanh: React.FC = () => {
         style={{
           fontFamily: "'Dancing Script', cursive",
           fontSize: "30px",
-          color: "#4A76A8", // 🎨 matches your gift box color
+          color: "#4A76A8",
           textShadow: "1px 1px 3px rgba(0,0,0,0.3)",
-          alignSelf: 'center'
-        ,textAlign: 'center'
+          alignSelf: "center",
+          textAlign: "center",
         }}
       >
-        Crossword Game 🔍
+        Crossword Game
       </span>
       <span
         style={{
           fontFamily: "'Roboto Mono', monospace",
           color: "#94A3B8",
           width: "90%",
-          fontSize: "16px",
-          alignSelf: 'center',
-          textAlign: 'center'
+          fontSize: "14px",
+          alignSelf: "center",
+          textAlign: "center",
         }}
       >
-        Find the secret word (column) by completing the each row
+        Find the secret word (column) by completing the each row 🔍
       </span>
 
       {/* Crossword grid */}
@@ -214,17 +211,17 @@ const CrosswordHanh: React.FC = () => {
           color: "black",
         }}
       >
-        <h3
+        <span
           style={{
-            fontFamily: "'Dancing Script', cursive",
-            fontSize: "18px",
-            color: "#4A76A8",
-            margin: "10px",
+            fontFamily: "'Roboto Mono', monospace",
+            color: "#94A3B8",
+            width: "90%",
+            fontSize: "16px",
           }}
         >
-          Clues 💡
-        </h3>
-        <ol style={{ lineHeight: "1.8" }}>
+          💡 Clues:
+        </span>
+        <ol>
           {words.map((w, i) => (
             <li key={i}>{w.clue}</li>
           ))}
@@ -233,27 +230,27 @@ const CrosswordHanh: React.FC = () => {
 
       {/* Completed message in modal */}
       <Modal show={showModal} onClose={() => setShowModal(false)}>
-        <div style={{ marginTop: "20px" }}>
-          <h2 style={{ color: "#4A76A8" }}>Secret column: 🎉 HANH 🎉</h2>
-          <p style={{ color: "black" }}>
-            Your name shines through this crossword, built from the traits that
-            make you truly special 💕
-          </p>
-          <button
-            onClick={() => navigate("/gift/2/received")}
+        <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+          <span style={{ fontSize: "18px", color: "#4A76A8" }}>
+            Secret column: HANH 🎉
+          </span>
+          <span
             style={{
-              marginTop: "20px",
-              padding: "8px 16px",
-              backgroundColor: "#4A76A8",
-              color: "white",
-              border: "none",
-              borderRadius: "6px",
-              fontWeight: "bold",
-              cursor: "pointer",
+              fontFamily: "'Roboto Mono', monospace",
+              color: "#94A3B8",
+              width: "90%",
+              fontSize: "16px",
             }}
           >
-            Reveal the Gift 🎁
-          </button>
+            The crossword reveals your name, woven from words that reflect your
+            traits and our story 💕
+          </span>
+          <CustomButton
+            onClick={() => navigate("/gift/2/received")}
+            style={{ marginTop: "20px" }}
+          >
+            Open gift
+          </CustomButton>
         </div>
       </Modal>
     </div>

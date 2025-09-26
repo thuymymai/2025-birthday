@@ -1,21 +1,33 @@
 // src/pages/JigsawPuzzle.tsx
-import React, { useState, useEffect } from "react";
 import confetti from "canvas-confetti";
-import { markGiftAsOpened } from "./utils";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import CustomButton from "./Button";
+import { markGiftAsOpened } from "./utils";
 
 const size = 4; // ⬅️ Change to 5 for 25 pieces
-const pieceSize = 80; // pixels per tile (smaller for more pieces)
 const totalPieces = size * size;
 
 const JigsawPuzzle: React.FC = () => {
   const navigate = useNavigate();
-
   const [pieces, setPieces] = useState<number[]>([]);
   const [selected, setSelected] = useState<number | null>(null);
+  const [imageSize, setImageSize] = useState<{
+    width: number;
+    height: number;
+  } | null>(null);
 
+  // Load natural image size so we can keep ratio
   useEffect(() => {
-    // Shuffle on load
+    const img = new Image();
+    img.src = "/puzzle.jpeg"; // 🔄 your image
+    img.onload = () => {
+      setImageSize({ width: img.width, height: img.height });
+    };
+  }, []);
+
+  // Shuffle on load
+  useEffect(() => {
     const shuffled = Array.from({ length: totalPieces }, (_, i) => i).sort(
       () => Math.random() - 0.5
     );
@@ -26,7 +38,6 @@ const JigsawPuzzle: React.FC = () => {
     if (selected === null) {
       setSelected(index);
     } else {
-      // swap positions
       const newPieces = [...pieces];
       [newPieces[selected], newPieces[index]] = [
         newPieces[index],
@@ -42,59 +53,97 @@ const JigsawPuzzle: React.FC = () => {
   useEffect(() => {
     if (solved && pieces.length > 0) {
       confetti({ particleCount: 250, spread: 70 });
-      markGiftAsOpened(3); // 🎁 mark Gift 3 solved
+      markGiftAsOpened(3);
     }
   }, [solved, pieces]);
 
-  return (
-    <div style={{ textAlign: "center", marginTop: "20px" }}>
-      <h2>🧩 Jigsaw Puzzle</h2>
+  if (!imageSize) return <p>Loading...</p>;
 
+  const aspectRatio = imageSize.width / imageSize.height;
+
+  return (
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        background: "url('/2.png') center/cover no-repeat",
+        textAlign: "center",
+        gap: "10px",
+        paddingTop: "20px",
+      }}
+    >
+      <span
+        style={{
+          fontFamily: "'Dancing Script', cursive",
+          fontSize: "30px",
+          color: "#4A76A8", // 🎨 matches your gift box color
+          textShadow: "1px 1px 3px rgba(0,0,0,0.3)",
+        }}
+      >
+        Puzzle Game
+      </span>
+      <span
+        style={{
+          fontFamily: "'Roboto Mono', monospace",
+          color: "#94A3B8",
+          width: "95%",
+          fontSize: "14px",
+          marginBottom: "10px",
+        }}
+      >
+        Tap a piece, then tap another spot to swap them. If the piece is not
+        blurred, it’s in the right spot 🧩
+      </span>
       {/* Puzzle grid */}
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: `repeat(${size}, ${pieceSize}px)`,
-          gridTemplateRows: `repeat(${size}, ${pieceSize}px)`,
+          gridTemplateColumns: `repeat(${size}, 1fr)`,
+          gridTemplateRows: `repeat(${size}, 1fr)`,
           gap: "2px",
-          justifyContent: "center",
+          width: "80%",
+          margin: "0 auto",
+          aspectRatio: `${aspectRatio}`, // ✅ keeps correct ratio
         }}
       >
-        {pieces.map((piece, index) => (
-          <div
-            key={index}
-            onClick={() => handleTap(index)}
-            style={{
-              width: pieceSize,
-              height: pieceSize,
-              backgroundImage: "url('/puzzle.jpeg')", // replace with your gift image
-              backgroundSize: `${size * pieceSize}px ${size * pieceSize}px`,
-              backgroundPosition: `${-(piece % size) * pieceSize}px ${
-                -Math.floor(piece / size) * pieceSize
-              }px`,
-              border:
-                selected === index ? "3px solid #ff4081" : "1px solid #aaa",
-              borderRadius: "4px",
-              cursor: "pointer",
-              filter: piece === index ? "none" : "blur(6px)", // 🔥 blur until correct
-              transition: "filter 0.3s ease",
-            }}
-          />
-        ))}
+        {pieces.map((piece, index) => {
+          const col = piece % size;
+          const row = Math.floor(piece / size);
+
+          return (
+            <div
+              key={index}
+              onClick={() => handleTap(index)}
+              style={{
+                width: "100%",
+                height: "100%",
+                backgroundImage: "url('/puzzle.jpeg')",
+                backgroundSize: `${size * 100}% ${size * 100}%`,
+                backgroundPosition: `${(col / (size - 1)) * 100}% ${
+                  (row / (size - 1)) * 100
+                }%`,
+                border:
+                  selected === index ? "3px solid #ff4081" : "1px solid #aaa",
+                borderRadius: "4px",
+                cursor: "pointer",
+                filter: piece === index ? "none" : "blur(6px)",
+                transition: "filter 0.3s ease",
+              }}
+            />
+          );
+        })}
       </div>
 
       {solved && (
-        <div>
-          <h3 style={{ marginTop: "20px" }}>
-            🎉 You solved it! Happy Birthday 💖
-          </h3>
-          <button
-            onClick={() => navigate("/gift/3/received")}
-            style={{ marginTop: "20px" }}
-          >
-            Reveal the Gift
-          </button>
-        </div>
+        <CustomButton
+          onClick={() => navigate("/gift/3/received")}
+          style={{ marginTop: "20px" }}
+        >
+          Open gift
+        </CustomButton>
       )}
     </div>
   );
