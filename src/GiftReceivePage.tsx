@@ -34,6 +34,7 @@ const GiftReceivedPage: React.FC = () => {
       >
         Happy Birthday #{giftId}
       </h2>
+
       {giftId === 1 && (
         <>
           <span
@@ -47,8 +48,8 @@ const GiftReceivedPage: React.FC = () => {
             Treat yourself with some new skincare ✨
           </span>
           <a
-            href={`url(${import.meta.env.BASE_URL}giftcard.jpg`}
-            download={`url(${import.meta.env.BASE_URL}giftcard.jpg`}
+            href={`${import.meta.env.BASE_URL}giftcard.jpg`}
+            download="giftcard.jpg"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -65,6 +66,7 @@ const GiftReceivedPage: React.FC = () => {
           </a>
         </>
       )}
+
       {giftId === 2 && (
         <>
           <span
@@ -77,14 +79,13 @@ const GiftReceivedPage: React.FC = () => {
             You are invited to go on a date with me on{" "}
             <strong>04/11/2025</strong> for{" "}
             <strong>
-              {" "}
               "The Chorus of the Finnish National Opera 80 years anniversary
               concert"
             </strong>
           </span>
           <a
-            href={`url(${import.meta.env.BASE_URL}concertTickets.jpg`}
-            download={`url(${import.meta.env.BASE_URL}concertTickets.jpg`}
+            href={`${import.meta.env.BASE_URL}concertTickets.jpg`}
+            download="concertTickets.jpg"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -101,7 +102,9 @@ const GiftReceivedPage: React.FC = () => {
           </a>
         </>
       )}
+
       {giftId === 3 && <GiftVideo />}
+
       <br />
       <CustomButton
         onClick={() => navigate("/gifts")}
