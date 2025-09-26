@@ -5,6 +5,7 @@ import GiftBoxesPage from "./GiftBoxesPage";
 import GiftGames from "./GiftGames";
 import GiftReceivedPage from "./GiftReceivePage";
 import Home from "./Home";
+import SolvedReveal from "./SolvedReveal";
 
 export const PageWrapper: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -56,6 +57,14 @@ const AnimatedRoutes: React.FC = () => {
           element={
             <PageWrapper>
               <GiftGames />
+            </PageWrapper>
+          }
+        />
+        <Route
+          path="/gift/3/reveal"
+          element={
+            <PageWrapper>
+              <SolvedReveal />
             </PageWrapper>
           }
         />

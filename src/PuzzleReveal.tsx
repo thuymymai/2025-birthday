@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
-import SolvedReveal from "./SolvedReveal";
+import { useNavigate } from "react-router-dom";
 import { markGiftAsOpened } from "./utils";
 
 const size = 4;
 const totalPieces = size * size;
 
 const JigsawPuzzle: React.FC = () => {
+  const navigate = useNavigate();
   const [pieces, setPieces] = useState<number[]>([]);
   const [selected, setSelected] = useState<number | null>(null);
   const [imageSize, setImageSize] = useState<{
     width: number;
     height: number;
   } | null>(null);
-  const [solved, setSolved] = useState(false);
 
   useEffect(() => {
     const img = new Image();
@@ -46,15 +46,15 @@ const JigsawPuzzle: React.FC = () => {
   useEffect(() => {
     const isSolved = pieces.every((p, i) => p === i);
 
-    if (isSolved && pieces.length > 0 && !solved) {
+    if (isSolved && pieces.length > 0) {
       markGiftAsOpened(3);
       const timeout = setTimeout(() => {
-        setSolved(true);
+        navigate("/gift/3/reveal");
       }, 2000);
 
       return () => clearTimeout(timeout);
     }
-  }, [pieces, solved]);
+  }, [pieces]);
 
   if (!imageSize) return <p>Loading...</p>;
 
@@ -76,90 +76,84 @@ const JigsawPuzzle: React.FC = () => {
         paddingTop: "20px",
       }}
     >
-      {!solved ? (
-        <>
-          <span
-            style={{
-              fontFamily: "'Dancing Script', cursive",
-              fontSize: "30px",
-              color: "#4A76A8",
-              textShadow: "1px 1px 3px rgba(0,0,0,0.3)",
-            }}
-          >
-            Puzzle Game
-          </span>
-          <span
-            style={{
-              fontFamily: "'Roboto Mono', monospace",
-              color: "#94A3B8",
-              width: "95%",
-              fontSize: "14px",
-              marginBottom: "10px",
-            }}
-          >
-            Tap a piece, then tap another spot to swap them. If the piece is not
-            blurred, it’s in the right spot 🧩
-          </span>
+      <>
+        <span
+          style={{
+            fontFamily: "'Dancing Script', cursive",
+            fontSize: "30px",
+            color: "#4A76A8",
+            textShadow: "1px 1px 3px rgba(0,0,0,0.3)",
+          }}
+        >
+          Puzzle Game
+        </span>
+        <span
+          style={{
+            fontFamily: "'Roboto Mono', monospace",
+            color: "#94A3B8",
+            width: "95%",
+            fontSize: "14px",
+            marginBottom: "10px",
+          }}
+        >
+          Tap a piece, then tap another spot to swap them. If the piece is not
+          blurred, it’s in the right spot 🧩
+        </span>
 
-          {/* Puzzle grid */}
+        {/* Puzzle grid */}
+        <div
+          style={{
+            position: "relative",
+            width: "80%",
+            margin: "0 auto",
+            aspectRatio: `${aspectRatio}`,
+          }}
+        >
+          <style></style>
+          {/* Puzzle pieces */}
           <div
             style={{
-              position: "relative",
-              width: "80%",
-              margin: "0 auto",
-              aspectRatio: `${aspectRatio}`,
+              display: "grid",
+              gridTemplateColumns: `repeat(${size}, 1fr)`,
+              gridTemplateRows: `repeat(${size}, 1fr)`,
+              gap: "2px",
+              width: "100%",
+              height: "100%",
             }}
           >
-            <style></style>
-            {/* Puzzle pieces */}
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: `repeat(${size}, 1fr)`,
-                gridTemplateRows: `repeat(${size}, 1fr)`,
-                gap: "2px",
-                width: "100%",
-                height: "100%",
-                opacity: solved ? 0 : 1,
-                transition: "opacity 4s ease-in-out",
-              }}
-            >
-              {pieces.map((piece, index) => {
-                const col = piece % size;
-                const row = Math.floor(piece / size);
+            {pieces.map((piece, index) => {
+              const col = piece % size;
+              const row = Math.floor(piece / size);
 
-                return (
-                  <div
-                    key={index}
-                    onClick={() => handleTap(index)}
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      backgroundImage: `url(${
-                        import.meta.env.BASE_URL
-                      }puzzle.jpeg)`,
-                      backgroundSize: `${size * 100}% ${size * 100}%`,
-                      backgroundPosition: `${(col / (size - 1)) * 100}% ${
-                        (row / (size - 1)) * 100
-                      }%`,
-                      border:
-                        selected === index
-                          ? "3px solid #ff4081"
-                          : "1px solid #aaa",
-                      borderRadius: "4px",
-                      cursor: "pointer",
-                      filter: piece === index ? "none" : "blur(6px)",
-                      transition: "filter 0.3s ease",
-                    }}
-                  />
-                );
-              })}
-            </div>
+              return (
+                <div
+                  key={index}
+                  onClick={() => handleTap(index)}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    backgroundImage: `url(${
+                      import.meta.env.BASE_URL
+                    }puzzle.jpeg)`,
+                    backgroundSize: `${size * 100}% ${size * 100}%`,
+                    backgroundPosition: `${(col / (size - 1)) * 100}% ${
+                      (row / (size - 1)) * 100
+                    }%`,
+                    border:
+                      selected === index
+                        ? "3px solid #ff4081"
+                        : "1px solid #aaa",
+                    borderRadius: "4px",
+                    cursor: "pointer",
+                    filter: piece === index ? "none" : "blur(6px)",
+                    transition: "filter 0.3s ease",
+                  }}
+                />
+              );
+            })}
           </div>
-        </>
-      ) : (
-        <SolvedReveal />
-      )}
+        </div>
+      </>
     </div>
   );
 };
