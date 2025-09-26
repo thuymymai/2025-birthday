@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 const GiftVideo: React.FC = () => {
-  const srcUrl = `https://drive.google.com/file/d/${fileId}/preview`;
+  const srcUrl = `https://drive.google.com/file/d/19qgo-IU_nRMQbRHWhVviUhQPk3b9jkj_/view?usp=sharing`;
 
   useEffect(() => {
     const bgAudio = document.querySelector("audio");
