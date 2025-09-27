@@ -124,7 +124,7 @@ const MemoryGame: React.FC = () => {
         ))}
       </div>
       <Modal show={matched.length === cards.length}>
-        <div>
+        <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
           <span
             style={{
               fontFamily: "'Roboto Mono', monospace",

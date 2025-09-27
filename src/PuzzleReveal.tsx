@@ -50,7 +50,7 @@ const JigsawPuzzle: React.FC = () => {
       markGiftAsOpened(3);
       const timeout = setTimeout(() => {
         navigate("/gift/3/reveal");
-      }, 2000);
+      }, 1000);
 
       return () => clearTimeout(timeout);
     }
